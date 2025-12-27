@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 export default function DonutCounter() {
   const [count, setCount] = useState(0);
-  const [fid, setFid] = useState<string | null>(null);
+  const [fid, setFid] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,13 +14,13 @@ export default function DonutCounter() {
     loadCount(farcasterFid);
   }, []);
 
-  const loadCount = async (userFid: string) => {
+  const loadCount = async (userFid) => {
     try {
       const res = await fetch(`/api/count?fid=${userFid}`);
       const data = await res.json();
       setCount(data.count || 0);
     } catch (e) {
-      // gagal? biarkan tetap 0
+      // ignore error
     } finally {
       setLoading(false);
     }
