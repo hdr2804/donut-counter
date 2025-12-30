@@ -42,3 +42,22 @@ export default function RootLayout({
     </html>
   );
 }
+import { useEffect } from "react";
+
+export default function OnChatWidget() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://onchat.sebayaki.com/widget.js";
+    script.onload = () => {
+      window.OnChat.mount("#onchat-widget", {
+        channel: "happy-new-year",
+        theme: "beeper-green",
+        hideMobileTabs: true,
+        hideBrand: true,
+      });
+    };
+    document.body.appendChild(script);
+  }, []);
+
+  return <div id="onchat-widget"></div>;
+}
